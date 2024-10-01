@@ -1,263 +1,209 @@
 import SwiftUI
 
-// Модель данных для изображений
+// Модель даних для зображень
 struct ImageData: Identifiable {
     let id = UUID()
     let name: String
     let description: String
 }
 
-struct NextView: View {
-    @State private var timeRemaining = 10
-    @State private var timer: Timer?
-    @State private var timerIsRunning = false
-    @State private var timerIsPaused = false
-    @State private var isCountingDown = false
-    @State private var cyclesCompleted = 0
-    @State private var totalCyclesCompleted = 0
-    @State private var iconColors = Array(repeating: Color.black, count: 8)
-    @State private var activeIconIndex = 0
-    @State private var imageIndex = 0
-    @State private var showCompletionSheet = false
-    @State private var hasStarted = false
-    @State private var selectedImage: ImageData?
-    @State private var showContinueButton = false
-    @State private var textInputs = Array(repeating: "", count: 8) // Поля для ввода текста
-
-    var imageName: String
-    let images = [
-        ImageData(name: "1", description: "Описание для изображения 1"),
-        ImageData(name: "2", description: "Описание для изображения 2"),
-        ImageData(name: "3", description: "Описание для изображения 3"),
-        ImageData(name: "4", description: "Описание для изображения 4"),
-        ImageData(name: "5", description: "Описание для изображения 5"),
-        ImageData(name: "6", description: "Описание для изображения 6")
-    ]
-    let icons = ["heart.circle", "dumbbell", "heart.circle", "dumbbell", "heart.circle", "dumbbell", "heart.circle", "dumbbell"]
-
-    private func startTimer() {
-        timer?.invalidate()
-        timeRemaining = 1
-        isCountingDown = false
-        cyclesCompleted = 0
-        activeIconIndex = 0
-        iconColors = Array(repeating: Color.black, count: 8)
-        totalCyclesCompleted = 0
-        showCompletionSheet = false
-        timerIsRunning = true
-        hasStarted = true
-        showContinueButton = false
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if timerIsRunning && !timerIsPaused {
-                if isCountingDown {
-                    if timeRemaining > 0 {
-                        timeRemaining -= 1
-                    } else {
-                        isCountingDown = false
-                        timeRemaining = 1
-                        cyclesCompleted += 1
-                        if cyclesCompleted >= 8 {
-                            completeFullCycle()
-                        }
-                    }
-                } else {
-                    if timeRemaining < 1 {
-                        timeRemaining += 1
-                    } else {
-                        updateActiveIcon()
-                        isCountingDown = true
-                    }
-                }
-            }
-        }
-    }
+// Структура для тренувальних днів
+struct TrainingDayView: View {
+    let title: String
+    let exercises: [[String]]
     
-    private func pauseTimer() {
-        timerIsPaused = true
-        showContinueButton = true
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timerIsRunning = false
-        showContinueButton = false
-    }
-    
-    private func updateActiveIcon() {
-        if activeIconIndex < iconColors.count {
-            iconColors[activeIconIndex] = .red
-            activeIconIndex += 1
-        }
-    }
-    
-    private func completeFullCycle() {
-        totalCyclesCompleted += 1
-        cyclesCompleted = 0
-        activeIconIndex = 0
-        iconColors = Array(repeating: Color.black, count: 8)
-        
-        if imageIndex < images.count - 1 {
-            imageIndex += 1
-        } else {
-            imageIndex = 0
-        }
-        
-        if totalCyclesCompleted >= 6 {
-            stopTimer()
-            showCompletionSheet = true
-        }
-    }
-
     var body: some View {
-        ZStack {
-            if imageName == "START" {
-                Image("listBumagy")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                
-                VStack {
-                    
-                    Label {
-                        Text("\(timeRemaining) s.Ex \(totalCyclesCompleted + 1) of 6")
-                    } icon: {
-                        Image(systemName: "clock")
-                    }
-                    .font(.largeTitle)
+        VStack {
+            ScrollView {
+                Text(title)
+                    .foregroundColor(.white)
+                    .font(.title)
                     .padding()
-
-                   
+                    .frame(maxWidth: .infinity)
+                    .background(Color.black.opacity(0.8)) // Фоновий колір для заголовка
+                    .cornerRadius(10)
                     .padding(.bottom)
 
-                    VStack(spacing: 10) {
-                        HStack(spacing: 30) {
-                            ForEach(0..<4, id: \.self) { index in
-                                Image(systemName: icons[index])
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 60, height: 40)
-                                    .foregroundColor(iconColors[index])
-                            }
-                        }
-                        HStack(spacing: 30) {
-                            ForEach(4..<8, id: \.self) { index in
-                                Image(systemName: icons[index])
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 60, height: 40)
-                                    .foregroundColor(iconColors[index])
-                            }
-                        }
-                    }
-                    
-
-                    if timerIsRunning {
-                        Image(images[imageIndex].name)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 370, height: 370)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    } else {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 15) {
-                                ForEach(images) { imageData in
-                                    Image(imageData.name)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 370, height: 370)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                        .onTapGesture {
-                                            selectedImage = imageData
-                                        }
-                                }
-                            }
-                            .padding(30)
-                            .frame(maxWidth: .infinity, maxHeight: 400, alignment: .top)
-                        }
-                    }
-
-                    HStack {
-                        Spacer()
-                        Button(action: startTimer) {
-                            Text(showContinueButton ? "Continue" : "Start")
-                                .frame(width: 100, height: 100)
-                                .background(timerIsRunning ? Color.black : Color.red)
-                                .font(.system(size: 30))
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                        }
-                        Spacer()
-                        Button(action: pauseTimer) {
-                            Text("Pause")
-                                .frame(width: 100, height: 100)
-                                .background(timerIsRunning && !timerIsPaused ? Color.yellow : Color.gray)
-                                .font(.system(size: 30))
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                        }
-                        Spacer()
-                        Button(action: stopTimer) {
-                            Text("Stop")
-                                .frame(width: 100, height: 100)
-                                .background(timerIsRunning ? Color.red : Color.black)
-                                .font(.system(size: 30))
-                                .foregroundColor(.white)
-                                .cornerRadius(50)
-                        }
-                        Spacer()
-                    }
-                }
-                .sheet(isPresented: $showCompletionSheet) {
+                ForEach(0..<exercises.count, id: \.self) { dayIndex in
                     VStack {
-                        Text("Вітаю! Тренування закінчилося, продовжуй у такому ж дусі і ти досягнеш своєї мети!")
-                            .font(.largeTitle)
-                            .padding()
+                        Text("День  \(dayIndex + 1)")
+                            .font(.headline)
+                            .padding(.top)
                         
-                        Button(action: {
-                            showCompletionSheet = false
-                        }) {
-                            Text("ОК")
-                                .font(.title)
+                        ForEach(exercises[dayIndex], id: \.self) { exercise in
+                            Text(exercise) // Відображаємо назви вправ
+                                .font(.title3)
+                                .padding(.horizontal)
+                                .frame(maxWidth: .infinity, alignment: .center) // Центруємо текст
                                 .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
+                                .background(Color.gray.opacity(0.3)) // Фоновий колір для тексту
                                 .cornerRadius(10)
                         }
                     }
-                    .padding()
+                    .padding(.bottom)
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
                 }
-                .sheet(item: $selectedImage) { imageData in
-                    VStack {
-                        Image(imageData.name)
-                            .resizable()
-                            .scaledToFit()
-                            .edgesIgnoringSafeArea(.all)
-                        
-                        Text(imageData.description)
-                            .font(.title)
-                            .padding()
+            }
+            
+        }
+        
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                HStack {
+                    Spacer()
+                    
+                    NavigationLink(destination: ContentView()) {
+                        Image(systemName: "house")
+                            .foregroundColor(.black)
                     }
                 }
-            } else if imageName == "Arny2" {
-                Image("listBumagy")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                HStack {
-                    // Ваш контент здесь
-                }
-            } else if imageName == "KayG" {
-                Image("listBumagy")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-            } else {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
             }
+        }
+    }
+    
+}
+
+// Структура для відображення інформації про бодибілдерів
+struct BodybuilderView: View {
+    let imageName: String
+    let description: String
+    let title: String
+    let exercises: [[String]]
+
+    var body: some View {
+        ZStack {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                TrainingDayView(title: title, exercises: exercises)
+            }
+        }
+    }
+}
+
+// Специфічні представлення для кожного бодібілдера
+struct Arny2View: View {
+    let exercises = [
+        ["Жим штанги: 3-4*10", "Жим штанги під кутом: 40г. 3-4*10", "Пуловер з гантеллю: 3-4*10", "Підтягування зворотнім хватом: 3-4*10", "Тяга штанги у нахилі: 3-4*10", "Станова тяга: 3-4*10", "Скручування: 5*25"],
+        ["Швунг: 3-4*10", "Махи гантель через боки: 3-4*10 ", "Протяжка до підборіддя: 3-4*10", "Армійский жим: 3-4*10", "Згинання рук зі штангою: 3-4*10", "Згинання рук з гантелями: 3-4*10", "Жим штанги вузьким хватом: 3-410", "Французький із под голови: 3-4*10", "Згинання запьястка зі штангою: 3-4*10", "Зворотні скпучування: 5*25"],
+        ["Присідання зі штангою: 3-4*10", "Впади: 3-4*10", "Сгинання ніг лежачі: 3-4*10", "Станова тяга: 3-4*10", "Доброго ранку: 3-4*10", "Підйом на носки зі штангою: 3-4*10", "Скручування: 5*25"],
+        ["Жим штанги: 3-4*10", "Жим штанги під кутом: 40г. 3-4*10", "Пуловер з гантеллю: 3-4*10", "Підтягування зворотнім хватом: 3-4*10", "Тяга штанги у нахилі: 3-4*10", "Станова тяга: 3-4*10", "Скручування: 5*25"],
+        ["Швунг: 3-4*10", "Махи гантель через боки: 3-4*10 ", "Протяжка до підборіддя: 3-4*10", "Армійский жим: 3-4*10", "Згинання рук зі штангою: 3-4*10", "Згинання рук з гантелями: 3-4*10", "Жим штанги вузьким хватом: 3-410", "Французький із под голови: 3-4*10", "Згинання запьястка зі штангою: 3-4*10", "Зворотні скпучування: 5*25"],
+        ["Присідання зі штангою: 3-4*10", "Впади: 3-4*10", "Сгинання ніг лежачі: 3-4*10", "Станова тяга: 3-4*10", "Доброго ранку: 3-4*10", "Підйом на носки зі штангою: 3-4*10", "Скручування: 5*25"],
+        ["Відпочинок"]
+        
+    ]
+    
+    var body: some View {
+        BodybuilderView(imageName: "Arny2",
+                        description: "Опис для Arny2",
+                        title: "План тренування: \nАрнольда Шварценегера.",
+                        exercises: exercises)
+    }
+}
+
+struct KayGView: View {
+    let exercises = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        
+    ]
+    
+    var body: some View {
+        BodybuilderView(imageName: "KayG",
+                        description: "",
+                        title: "План тренування: \nКая Гріна.",
+                        exercises: exercises)
+    }
+}
+
+struct KevinView: View {
+    let exercises = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ]
+    
+    var body: some View {
+        BodybuilderView(imageName: "Kevin",
+                        description: "",
+                        title: "План тренування: \nКевіна Леврона.",
+                        exercises: exercises)
+    }
+}
+
+struct KhrisView: View {
+    let exercises = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ]
+    
+    var body: some View {
+        BodybuilderView(imageName: "Khris",
+                        description: "Ось ваш план тренування для Кріса Бумстеда",
+                        title: "План тренування: \nКріса Бумстеда.",
+                        exercises: exercises)
+    }
+}
+
+struct OhernView: View {
+    let exercises = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ]
+    
+    var body: some View {
+        BodybuilderView(imageName: "Ohern",
+                        description: "",
+                        title: "План тренування: \nМайка Охерна.",
+                        exercises: exercises)
+    }
+}
+
+// Основне представлення NextView, яке відображає вибране зображення
+struct NextView: View {
+    var imageName: String
+    
+    var body: some View {
+        switch imageName {
+        case "Arny2":
+            Arny2View()
+        case "KayG":
+            KayGView()
+        case "Kevin":
+            KevinView()
+        case "Khris":
+            KhrisView()
+        case "Ohern":
+            OhernView()
+        default:
+            Text("Зображення не знайдено")
+                .font(.headline)
+                .padding()
         }
     }
 }
@@ -271,8 +217,14 @@ struct NextView_Previews: PreviewProvider {
             NextView(imageName: "KayG")
                 .previewDisplayName("KayG Preview")
             
-            NextView(imageName: "START")
-                .previewDisplayName("START")
+            NextView(imageName: "Kevin")
+                .previewDisplayName("Kevin Preview")
+            
+            NextView(imageName: "Khris")
+                .previewDisplayName("Khris Preview")
+            
+            NextView(imageName: "Ohern")
+                .previewDisplayName("Ohern Preview")
         }
     }
 }

@@ -108,173 +108,12 @@ let buttons = [
 
 ]
 
-// Представление для полноэкранного видео
-struct FullScreenVideoView: View {
-    let videoURL: URL
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State private var dragOffset: CGFloat = 0.0
-    private let threshold: CGFloat = -100.0 // Порог для свайпа вверх
 
-    var body: some View {
-        ZStack {
-            VStack {
-                if videoURL.absoluteString.contains("youtube.com") {
-                    WebView(url: videoURL)
-                        .edgesIgnoringSafeArea(.all)
-                } else {
-                    VideoPlayer(player: AVPlayer(url: videoURL))
-                        .edgesIgnoringSafeArea(.all)
-                }
-            }
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.translation.height < 0 {
-                            dragOffset = value.translation.height
-                        }
-                    }
-                    .onEnded { _ in
-                        if dragOffset < threshold {
-                            presentationMode.wrappedValue.dismiss() // Закрытие на свайп вверх
-                        }
-                        dragOffset = 0.0
-                    }
-            )
-            .onTapGesture {
-                presentationMode.wrappedValue.dismiss() // Закрытие на тап
-            }
-            
-            // Кнопка выхода вверху
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss() // Закрытие на нажатие кнопки
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.white)
-                            .padding()
-                            .offset(y: -250)
-                    }
-                    Spacer()
-                }
-                Spacer()
-            }
-        }
-    }
-}
-
-// Представление кнопки слайдера
-struct SliderButtonView: View {
-    let button: SliderButton
-    @Binding var selectedIndex: Int
-    let index: Int
-    let geometry: GeometryProxy
-    
-    @State private var isShowingFullScreenVideo: Bool = false
-    
-    var body: some View {
-        VStack {
-            Button(action: {
-                selectedIndex = index
-                if button.videoURL != nil {
-                    isShowingFullScreenVideo = true
-                }
-            }) {
-                VStack {
-                    // Отображение заголовка над изображением
-                    Text(button.title)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding(.top, 5)
-                    
-                    if let previewImageName = button.previewImageName,
-                       let previewImage = UIImage(named: previewImageName) {
-                        Image(uiImage: previewImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
-                            .clipped()
-                            .overlay(
-                                VStack {
-                                    Spacer()
-                                    HStack {
-                                        Spacer()
-                                        Image(systemName: "play.circle.fill")
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                            .foregroundColor(.white)
-                                            .padding()
-                                    }
-                                }
-                            )
-                    } else {
-                        Text("Видео не доступно")
-                            .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
-                            .background(Color.gray)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        // Защита от выхода за пределы массива
-                        ForEach(0..<min(button.progressValues.count, button.progressTexts.count, button.progressColors.count), id: \.self) { i in
-                            VStack(alignment: .leading) {
-                                Text(button.progressTexts[i])
-                                    .font(.caption)
-                                    .bold()
-                                    .foregroundColor(.black)
-                                
-                                ProgressView(value: min(max(button.progressValues[i], 0), 1), total: 1)
-                                    .progressViewStyle(LinearProgressViewStyle(tint: button.progressColors[i]))
-                                    .frame(width: geometry.size.width * 0.75, height: 10)
-                                    .padding(4)
-                            }
-                        }
-                        .padding(.top, 5)
-                    }
-                    .padding(.top, 5)
-                }
-                .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.9)
-                .background(Color.black.opacity(0.4))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .shadow(radius: 10)
-            }
-        }
-        .fullScreenCover(isPresented: $isShowingFullScreenVideo) {
-            if let videoURL = button.videoURL {
-                FullScreenVideoView(videoURL: videoURL)
-            }
-        }
-    }
-}
-
-// Детализированное представление, показывающее больше информации при нажатии кнопки.
-struct DetailView: View {
-    let button: SliderButton
-    
-    var body: some View {
-        VStack {
-            Text(button.title)
-                .font(.largeTitle)
-                .padding()
-            
-            Text(button.description)
-                .padding()
-        }
-        .navigationTitle("Детали упражнения")
-    }
-}
-
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
+// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера
 struct Chest: View {
     @State private var selectedIndex = 0
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -295,17 +134,34 @@ struct Chest: View {
                             }
                             .padding()
                         }
+                        .padding(.top, -90)
                     }
+                }
+                
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 10)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray.opacity(0.2))
                 }
             }
         }
-        .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад»
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-// Провайдер предварительного просмотра для SwiftUI.
+// Провайдер предварительного просмотра для SwiftUI
 struct MuscleDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Chest()
     }
 }
+
+

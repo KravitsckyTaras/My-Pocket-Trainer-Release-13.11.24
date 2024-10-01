@@ -21,7 +21,7 @@ let Bbuttons = [
     SliderButton(
         title: "Тяга штанги під нахилом.",
         description: "Описание кнопки 2",
-        videoURL: URL(string: "https://www.youtube.com/embed/1sRsWno1tF4?si=MsGnVQEZrekg8eif"),
+        videoURL: URL(string: "https://www.youtube.com/embed/nSVo6ehIsl0?si=JuSewtIn6eGsiMt3"),
         previewImageName: "52",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: [" Трапецеподібна.","  Велика кругла.", "  Найширша", "  Ромбоподібна.", ]
@@ -30,7 +30,7 @@ let Bbuttons = [
     SliderButton(
         title: "Тяга штанги зворотнім хваьом.",
         description: "Описание кнопки 3",
-        videoURL: URL(string: ""),
+        videoURL: URL(string: "https://www.youtube.com/embed/U1JcOiMN1S8?si=CB1nq2bitwP5P1WN"),
         previewImageName: "53",
         progressValues: [1, 0.9, 0.8, 0.7],
         progressTexts: [ "Найширша"," Трапецеподібна.", "  Ромбоподібна.","  Велика кругла." ],
@@ -100,7 +100,8 @@ let Bbuttons = [
 // Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
 struct Back: View {
     @State private var selectedIndex = 0
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -121,7 +122,30 @@ struct Back: View {
                             }
                             .padding()
                         }
+                        
+                        .padding(.top, -90)
+                        
                     }
+                }
+                VStack {
+                    // Ваш основной контент здесь
+                    
+                    Spacer() // Отодвигает содержимое вверх
+
+                    // Иконка "Назад" внизу
+                    Button(action: {
+                        // Возврат на предыдущий экран
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 10)
+                    }
+                    
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray.opacity(0.2))
+
                 }
             }
         }

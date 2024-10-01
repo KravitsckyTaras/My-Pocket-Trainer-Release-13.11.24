@@ -18,12 +18,12 @@ let SHbuttons = [
         ,progressColors: [.red, .red, .yellow, .green,]  // Цвета для шкалы прогресса
     ),
     SliderButton(
-        title: "Армійскій жим.",
+        title: "Жим штанги з за голови.",
         description: "",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/H2cQTrU9fYI?si=ZXXxBFarttTfPTzy"), // Прямой URL видеофайла
         previewImageName: "4", // Имя изображения из ассетов (опционально).
         progressValues: [1, 0.9, 0.80, 0.80],
-        progressTexts: ["  Передня дельта", "  Середня дельта", "  Трапеціподібна",  " Тріцепс"]
+        progressTexts: ["  Середня дельта", "  Передня дельта", "  Трапеціподібна",  " Тріцепс"]
         ,progressColors: [.red, .orange, .yellow, .yellow,]  // Цвета для шкалы прогресса
     ),
     SliderButton(
@@ -38,7 +38,7 @@ let SHbuttons = [
     SliderButton(
         title: "Жим гантель сидячі.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/Pwb-b_nGvcE?si=490Q3lWZj0DofmEi"), // Прямой URL видеофайла
         previewImageName: "6", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Передня дельта", "  Середня дельта", "  Задня дельта",  " Трицепс"]
@@ -47,7 +47,7 @@ let SHbuttons = [
     SliderButton(
         title: "Жим Арнольда",
         description: "Описание кнопки 1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/Tz6Xsv-16LA?si=L6LcRCZzV7GD_Qr7"), // Прямой URL видеофайла
         previewImageName: "7", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Передня дельта", "  Середня дельта", "  Трапеціподібна",  "  Трицепс"]
@@ -56,7 +56,7 @@ let SHbuttons = [
     SliderButton(
         title: "Відведення гантель через боки.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/H-2w-Jp21Dw?si=d6eFTexwe2PJJv-H"), // Прямой URL видеофайла
         previewImageName: "8", // Имя изображения из ассетов (опционально).
         progressValues: [1, 0.9, 0.8, 0.3],
         progressTexts: ["  Середня дельта", "  Передня Дельта", "  трапеціподібна",  " Задня дельта"]
@@ -112,7 +112,8 @@ let SHbuttons = [
 // Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
 struct Sholder: View {
     @State private var selectedIndex = 0
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -133,7 +134,29 @@ struct Sholder: View {
                             }
                             .padding()
                         }
+                        .padding(.top, -90)
+                        
                     }
+                }
+                VStack {
+                    // Ваш основной контент здесь
+                    
+                    Spacer() // Отодвигает содержимое вверх
+
+                    // Иконка "Назад" внизу
+                    Button(action: {
+                        // Возврат на предыдущий экран
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 10)
+                    }
+                    
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray.opacity(0.2))
+
                 }
             }
         }

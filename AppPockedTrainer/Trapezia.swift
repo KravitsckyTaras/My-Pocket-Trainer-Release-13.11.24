@@ -30,7 +30,7 @@ let Tbuttons = [
     SliderButton(
         title: "Шраги зі штангою за спиною.",
         description: "Описание кнопки 3",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/03I3dap_LMg?si=eyzNRimjsVWFezVo"), // Прямой URL видеофайла
         previewImageName: "2", // Имя изображения из ассетов (опционально).
         progressValues: [1, 0.7, 0.7, 0],
         progressTexts: [" Верх трапеціподібноі.",  "  Ромбоподібна.", "  Шия.", ""],
@@ -39,7 +39,7 @@ let Tbuttons = [
     SliderButton(
         title: "Тяга штанги до підборіддя.",
         description: "Описание кнопки 4",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://youtube.com/embed/7cEfqmysJfU?feature=share"), // Прямой URL видеофайла
         previewImageName: "3", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 0.8, 0.4],
         progressTexts: ["  Трапеціподібна.", "  Середня дельта.", "  Передня дельта.",  "  Біцепс."]
@@ -52,7 +52,8 @@ let Tbuttons = [
 // Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
 struct Trapezia: View {
     @State private var selectedIndex = 0
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -73,7 +74,30 @@ struct Trapezia: View {
                             }
                             .padding()
                         }
+                        
+                        .padding(.top, -90)
+                        
                     }
+                }
+                VStack {
+                    // Ваш основной контент здесь
+                    
+                    Spacer() // Отодвигает содержимое вверх
+
+                    // Иконка "Назад" внизу
+                    Button(action: {
+                        // Возврат на предыдущий экран
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 10)
+                    }
+                    
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray.opacity(0.2))
+
                 }
             }
         }

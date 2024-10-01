@@ -13,12 +13,10 @@ struct ByContactTrainer: View {
     
     // Массив с данными тренеров с индивидуальными URL
     let trainerData: [TrainerInfo] = [
-        TrainerInfo(imageName: "Sasha", name: "Саша", telegramURL: "https://t.me/Sash88FRDM", instagramURL: "https://www.instagram.com/trener_taras"),
+        TrainerInfo(imageName: "Sasha", name: "Саша", telegramURL: "https://t.me/Sash88FRDM", instagramURL: "https://www.instagram.com/sasha_fitness_coach/profilecard/?igsh=Z3h1NWNvM2lwajJs"),
         TrainerInfo(imageName: "Taras", name: "Тарас", telegramURL: "https://t.me/trener_taras", instagramURL: "https://www.instagram.com/trener_taras"),
-        TrainerInfo(imageName: "Dobrinia", name: "Добриня", telegramURL: "https://t.me/trener_alexey", instagramURL: "https://www.instagram.com/trener_alexey"),
-        TrainerInfo(imageName: "Chel", name: "Аркадій", telegramURL: "https://t.me/trener_olga", instagramURL: "https://www.instagram.com/trener_olga"),
-        TrainerInfo(imageName: "Taras1", name: "Максім", telegramURL: "https://t.me/trener_elena", instagramURL: "https://www.instagram.com/trener_elena"),
-        TrainerInfo(imageName: "pngwing", name: "???", telegramURL: "https://t.me/trener_dmitriy", instagramURL: "https://www.instagram.com/trener_dmitriy"),
+        TrainerInfo(imageName: "pngwing", name: "Тут можеш бути ти.", telegramURL: "", instagramURL: ""),
+       
     ]
     
     @State private var showCustomAlert = false
@@ -61,7 +59,7 @@ struct ByContactTrainer: View {
                                     Color.black.opacity(0.5)
                                         .cornerRadius(10)
 
-                                    Text("Тренер \(trainer.name)") // Имя тренера с приставкой
+                                    Text("Тренер: \(trainer.name)") // Имя тренера с приставкой
                                         .font(.headline)
                                         .foregroundColor(.white)
                                         .padding(5) // Отступ для текста
@@ -80,10 +78,37 @@ struct ByContactTrainer: View {
                         VStack(spacing: 20) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 10) {
-                                    Text("Тренер \(selectedTrainer?.name ?? "Тренер")") // Добавляем "Тренер" перед именем
+                                    Text("Тренер: \(selectedTrainer?.name ?? "Тренер")") // Добавляем "Тренер" перед именем
                                         .font(.system(size: 18, weight: .bold))
+
+                                    HStack(spacing: 20) {
+                                        Button(action: {
+                                            if let url = URL(string: selectedTrainer?.telegramURL ?? "") {
+                                                openURL(url)
+                                            }
+                                        }) {
+                                            Image("telega")
+                                                .resizable()
+                                                .frame(width: 60, height: 60) // Укажите размер иконки
+                                        }
+                                      
+
+                                        Button(action: {
+                                            if let url = URL(string: selectedTrainer?.instagramURL ?? "") {
+                                                openURL(url)
+                                            }
+                                        }) {
+                                            Image("insta")
+                                                .resizable()
+                                                .frame(width: 60, height: 60) // Укажите размер иконки
+                                        }
+                                    }
+
+                                    
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                
 
                                 Image(selectedTrainer?.imageName ?? "")
                                     .resizable()
@@ -92,30 +117,9 @@ struct ByContactTrainer: View {
                             }
                             .padding(.horizontal)
 
-                            HStack(spacing: 20) {
-                                Button("Telegram") {
-                                    if let url = URL(string: selectedTrainer?.telegramURL ?? "") {
-                                        openURL(url)
-                                    }
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                                
-                                Button("Instagram") {
-                                    if let url = URL(string: selectedTrainer?.instagramURL ?? "") {
-                                        openURL(url)
-                                    }
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .background(Color.pink)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                            }
-                            .padding(.top, 10)
+                           
+
+                           
                         }
                         .frame(width: 280, height: 220)
                         .background(Color.white)
@@ -130,7 +134,7 @@ struct ByContactTrainer: View {
                                     .font(.system(size: 30))
                                     .padding(.top, 10)
                             }
-                            .padding(.trailing, 130)
+                            .padding(.trailing, 10)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                         )
                     }

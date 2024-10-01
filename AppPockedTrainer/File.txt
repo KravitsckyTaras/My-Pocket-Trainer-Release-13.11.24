@@ -1,0 +1,29 @@
+.toolbar {
+    ToolbarItemGroup(placement: .navigationBarLeading) {
+        NavigationLink(destination: ContentView()) { // Додано NavigationLink для повернення до ContentView
+            Image(systemName: "house")
+                .foregroundColor(Color.black)
+        }
+        
+        Spacer() // Додає відступ між елементами
+
+        Button(action: {
+            showingDownloadDays.toggle()
+        }) {
+            Image(systemName: "arrow.down.circle")
+                .foregroundColor(.black)
+        }
+
+        Spacer() // Додає відступ між елементами
+
+        Button(action: {
+            showingDaysOfWeek.toggle()
+        }) {
+            Image(systemName: "square.and.arrow.down")
+                .rotationEffect(.degrees(180))
+                .font(.headline)
+                .foregroundColor(.black)
+                .offset(y: 3)
+        }
+    }
+}

@@ -9,7 +9,7 @@ let Bibuttons = [
     SliderButton(
         title: "Підом штанги.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/jOMFGhJCOsA?si=INU-X2BB0mtcQMT1"), // Прямой URL видеофайла
         previewImageName: "13", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 1, 0.8],
         progressTexts: ["  Біцепс: Плечева.", "  Біцепс: Довга головка.", "  Біцепс: Коротка головка.",  "  Передплічча."]
@@ -46,7 +46,7 @@ let Bibuttons = [
     SliderButton(
         title: "Біцепс у кроссовері.",
         description: "Описание кнопки 4",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/4NHqYPlIp1A?si=3UanEljZYFpRodlT"), // Прямой URL видеофайла
         previewImageName: "17", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 1, 0.9],
         progressTexts: ["  Біцепс: Плечева.", "  Біцепс: Довга головка.", "  Біцепс: Коротка головка.",  "  Передплічча."]
@@ -55,7 +55,7 @@ let Bibuttons = [
     SliderButton(
         title: "Підйом з упором в коліно.",
         description: "Описание кнопки 3",
-        videoURL: URL(string: ""),
+        videoURL: URL(string: "https://www.youtube.com/embed/OGze5hZjXMk?si=nYTo9VFiI2RVJQ1Y"),
         previewImageName: "18",
         progressValues: [1, 1, 1, 0.9],
         progressTexts: ["  Біцепс: Плечева.", "  Біцепс: Довга головка.", "  Біцепс: Коротка головка.",  "  Передплічча."],
@@ -64,7 +64,7 @@ let Bibuttons = [
     SliderButton(
         title: "Підйом з супінаціею.",
         description: "Описание кнопки 4",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/r4Y5BRMaayE?si=zxJ-Z_sjYkb88Psf"), // Прямой URL видеофайла
         previewImageName: "89", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 1, 0.9],
         progressTexts: ["  Біцепс: Плечева.", "  Біцепс: Довга головка.", "  Біцепс: Коротка головка.",  "  Передплічча."],
@@ -93,7 +93,7 @@ let Bibuttons = [
     SliderButton(
         title: "Підйом зворотнім хватом.",
         description: "Описание кнопки 4",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
+        videoURL: URL(string: "https://www.youtube.com/embed/0ju_qBeuG3k?si=rJ0GvoYvTTPTyhoj"), // Прямой URL видеофайла
         previewImageName: "N19", // Имя изображения из ассетов (опционально).
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Передплічча.", "  Біцепс: Плечева.", "  Біцепс: Довга головка.", "  Біцепс: Коротка головка.",  ],
@@ -109,7 +109,8 @@ let Bibuttons = [
 // Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
 struct Biceps: View {
     @State private var selectedIndex = 0
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -130,7 +131,29 @@ struct Biceps: View {
                             }
                             .padding()
                         }
+                        .padding(.top, -90)
+                        
                     }
+                }
+                VStack {
+                    // Ваш основной контент здесь
+                    
+                    Spacer() // Отодвигает содержимое вверх
+
+                    // Иконка "Назад" внизу
+                    Button(action: {
+                        // Возврат на предыдущий экран
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 10)
+                    }
+                    
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray.opacity(0.2))
+
                 }
             }
         }

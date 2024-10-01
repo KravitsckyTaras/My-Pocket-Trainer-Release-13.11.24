@@ -1,170 +1,113 @@
 import SwiftUI
 
-// Экран Muscles
+// Пример перечисления для типов мышц
+enum MuscleType: CaseIterable {
+    case chest, back, trapezia, shoulder, biceps, triceps, quad, thighBiceps, gluteus, calf, forearm, core
+    
+    var icon: Image {
+        switch self {
+        case .chest: return Image("IconMuscle5")
+        case .back: return Image("IconMuscle1")
+        case .trapezia: return Image("IconMuscle12")
+        case .shoulder: return Image("IconMuscle10")
+        case .biceps: return Image("IconMuscle3")
+        case .triceps: return Image("IconMuscle11")
+        case .quad: return Image("IconMuscle9")
+        case .thighBiceps: return Image("IconMuscle2")
+        case .gluteus: return Image("IconMuscle8")
+        case .calf: return Image("IconMuscle7")
+        case .forearm: return Image("IconMuscle4")
+        case .core: return Image("IconMuscle6")
+        }
+    }
+}
+
+// Екран Muscules
 struct Muscules: View {
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         NavigationView {
             ZStack {
-                // Фоновое изображение
-                Image("listBumagy") // Замените "listBumagy" на имя вашего изображения
+                Image("listBumagy")
                     .resizable()
                     .scaledToFill()
-                    .edgesIgnoringSafeArea(.all) // Изображение будет занимать весь экран
+                    .edgesIgnoringSafeArea(.all)
                 
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        // Первая иконка
-                        NavigationLink(destination: Chest()) {
-                            Image("IconMuscle5")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
+                GeometryReader { geometry in
+                    ScrollView {
+                        // Создание сетки с 3 строками
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            let iconWidth = (geometry.size.width / 3) - 20
+                            let iconHeight = iconWidth * 1.27
+                            
+                            ForEach(MuscleType.allCases, id: \.self) { muscle in
+                                NavigationLink(destination: destinationView(for: muscle)) {
+                                    muscle.icon
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: iconWidth, height: iconHeight)
+                                        .background(Color.gray.opacity(0.4))
+                                        .cornerRadius(10)
+                                }
+                            }
                         }
-                        
-                        // Вторая иконка
-                        NavigationLink(destination: Back()) {
-                            Image("IconMuscle1")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Третья иконка
-                        NavigationLink(destination: Trapezia()) {
-                            Image("IconMuscle12")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Четвертая иконка
-                        NavigationLink(destination: Sholder()) {
-                            Image("IconMuscle10")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Пятая иконка
-                        NavigationLink(destination: Biceps()) {
-                            Image("IconMuscle3")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Шестая иконка
-                        NavigationLink(destination: Triceps()) {
-                            Image("IconMuscle11")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Седьмая иконка
-                        NavigationLink(destination: Chest()) {
-                            Image("IconMuscle9")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Восьмая иконка
-                        NavigationLink(destination: Chest()) {
-                            Image("IconMuscle2")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Девятая иконка
-                        NavigationLink(destination: Chest()) {
-                            Image("IconMuscle8")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Десятая иконка
-                        NavigationLink(destination: Chest()) {
-                            Image("IconMuscle7")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Одиннадцатая иконка
-                        NavigationLink(destination: Forearm()) {
-                            Image("IconMuscle4")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
-                        
-                        // Двенадцатая иконка
-                        NavigationLink(destination: Chest()) {
-                            Image("IconMuscle6")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 150)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(10)
-                        }
+                        .padding(.top, 20)
+
+                        .padding(.horizontal, 30)
                     }
-                    .padding()
+                    Spacer()
+
+                    .padding(.top, 40)
                 }
-            }
-        }
-        .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад»
-        .toolbar {
-            // Основной контейнер для кнопок на одной строке
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                HStack {
-                    // Кнопка для возврата на предыдущее окно
+            
+                
+                // Нижнее меню
+                VStack {
+                    Spacer()
+                    HStack {
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image(systemName: "house.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.black)
+                                .padding(.vertical, 10)
+
+                        }
+
+                        .frame(maxWidth: .infinity)
+                        .background(Color.gray.opacity(0.2))
+                    }
                     
-                    // Остальные кнопки навигации
-                    NavigationLink(destination: ContentView()) {
-                        Image(systemName: "house") // Иконка для "Home"
-                            .foregroundColor(.black)
-                    }
-                    NavigationLink(destination: Muscules()) {
-                        Image(systemName: "figure")
-                            .foregroundColor(.black)
-                    }
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
-    // Определение макета сетки: 3 столбца
+    // Три столбца в сетке
     private var columns: [GridItem] {
-        [
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ]
+        Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
+    }
+    
+    // Функция для получения представления в зависимости от типа мышцы
+    @ViewBuilder
+    private func destinationView(for muscle: MuscleType) -> some View {
+        switch muscle {
+        case .chest:      Chest()
+        case .back:       Back()
+        case .trapezia:   Trapezia()
+        case .shoulder:   Sholder()
+        case .biceps:     Biceps()
+        case .triceps:    Triceps()
+        case .quad:       Quadro()
+        case .thighBiceps: ThingBiceps()
+        case .gluteus:    Glutus()
+        case .calf:       CalfMuscules()
+        case .forearm:    Forearm()
+        case .core:       Core()
+        }
     }
 }
 
@@ -173,3 +116,6 @@ struct Muscules_Previews: PreviewProvider {
         Muscules()
     }
 }
+
+
+

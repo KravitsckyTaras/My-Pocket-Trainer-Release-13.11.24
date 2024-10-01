@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF51DE512CB8111200B6E821 /* Quadro.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DE502CB810F700B6E821 /* Quadro.swift */; };
+		EF51DE532CB812CF00B6E821 /* ThingBiceps.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DE522CB812B900B6E821 /* ThingBiceps.swift */; };
+		EF51DE552CB813D800B6E821 /* Glunus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DE542CB813D600B6E821 /* Glunus.swift */; };
+		EF51DEA72CB9B9B500B6E821 /* CalfMuscules.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DEA62CB9B9A000B6E821 /* CalfMuscules.swift */; };
+		EFC558902CB508E600E952B7 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC5588F2CB508D700E952B7 /* Core.swift */; };
+		FA02E6712CBD33980090D4C2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02E6702CBD337E0090D4C2 /* ContentView.swift */; };
+		FA2DE0052CC91DEB00824600 /* NewTrainingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2DE0042CC91DD800824600 /* NewTrainingWindow.swift */; };
+		FABBF3C92CCE7A9900B54091 /* InterfaceForExersize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABBF3C82CCE7A7A00B54091 /* InterfaceForExersize.swift */; };
 		FAE1C5582CA559CD00AB13C3 /* AppPockedTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5572CA559CD00AB13C3 /* AppPockedTrainerApp.swift */; };
-		FAE1C55A2CA559CD00AB13C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5592CA559CD00AB13C3 /* ContentView.swift */; };
 		FAE1C55C2CA559CE00AB13C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE1C55B2CA559CE00AB13C3 /* Assets.xcassets */; };
 		FAE1C55F2CA559CE00AB13C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE1C55E2CA559CE00AB13C3 /* Preview Assets.xcassets */; };
 		FAE1C5662CA55A5000AB13C3 /* Muscules.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5652CA55A5000AB13C3 /* Muscules.swift */; };
-		FAE1C5682CA55A6500AB13C3 /* MyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5672CA55A6500AB13C3 /* MyData.swift */; };
 		FAE1C56C2CA55AD800AB13C3 /* NextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C56B2CA55AD800AB13C3 /* NextView.swift */; };
 		FAE1C56E2CA55D1900AB13C3 /* Sholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C56D2CA55D1900AB13C3 /* Sholder.swift */; };
 		FAE1C5702CA55E8600AB13C3 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C56F2CA55E8600AB13C3 /* Chest.swift */; };
@@ -23,18 +29,24 @@
 		FAE1C57A2CA5605B00AB13C3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5792CA5605B00AB13C3 /* WebView.swift */; };
 		FAE1C57C2CA560BD00AB13C3 /* Forearm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C57B2CA560BD00AB13C3 /* Forearm.swift */; };
 		FAE1C5872CA695CE00AB13C3 /* ByContactTrainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5862CA695CE00AB13C3 /* ByContactTrainer.swift */; };
-		FAE1C5A72CA9921200AB13C3 /* BoockTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5A62CA9921200AB13C3 /* BoockTraining.swift */; };
 		FAE1C5A92CA9D5A100AB13C3 /* DDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C5A82CA9D5A100AB13C3 /* DDetailView.swift */; };
+		FAF1E1532CC68F6C004F0737 /* MyData 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1E1522CC68F6C004F0737 /* MyData 2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF51DE502CB810F700B6E821 /* Quadro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadro.swift; sourceTree = "<group>"; };
+		EF51DE522CB812B900B6E821 /* ThingBiceps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingBiceps.swift; sourceTree = "<group>"; };
+		EF51DE542CB813D600B6E821 /* Glunus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glunus.swift; sourceTree = "<group>"; };
+		EF51DEA62CB9B9A000B6E821 /* CalfMuscules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalfMuscules.swift; sourceTree = "<group>"; };
+		EFC5588F2CB508D700E952B7 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		FA02E6702CBD337E0090D4C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FA2DE0042CC91DD800824600 /* NewTrainingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTrainingWindow.swift; sourceTree = "<group>"; };
+		FABBF3C82CCE7A7A00B54091 /* InterfaceForExersize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceForExersize.swift; sourceTree = "<group>"; };
 		FAE1C5542CA559CD00AB13C3 /* AppPockedTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppPockedTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE1C5572CA559CD00AB13C3 /* AppPockedTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPockedTrainerApp.swift; sourceTree = "<group>"; };
-		FAE1C5592CA559CD00AB13C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FAE1C55B2CA559CE00AB13C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAE1C55E2CA559CE00AB13C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FAE1C5652CA55A5000AB13C3 /* Muscules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Muscules.swift; sourceTree = "<group>"; };
-		FAE1C5672CA55A6500AB13C3 /* MyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyData.swift; sourceTree = "<group>"; };
 		FAE1C56B2CA55AD800AB13C3 /* NextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextView.swift; sourceTree = "<group>"; };
 		FAE1C56D2CA55D1900AB13C3 /* Sholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sholder.swift; sourceTree = "<group>"; };
 		FAE1C56F2CA55E8600AB13C3 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
@@ -45,8 +57,8 @@
 		FAE1C5792CA5605B00AB13C3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		FAE1C57B2CA560BD00AB13C3 /* Forearm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forearm.swift; sourceTree = "<group>"; };
 		FAE1C5862CA695CE00AB13C3 /* ByContactTrainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByContactTrainer.swift; sourceTree = "<group>"; };
-		FAE1C5A62CA9921200AB13C3 /* BoockTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoockTraining.swift; path = "../../Програмування/Страховка/BoockTraining.swift"; sourceTree = "<group>"; };
 		FAE1C5A82CA9D5A100AB13C3 /* DDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDetailView.swift; sourceTree = "<group>"; };
+		FAF1E1522CC68F6C004F0737 /* MyData 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyData 2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,10 +92,11 @@
 			isa = PBXGroup;
 			children = (
 				FAE1C5572CA559CD00AB13C3 /* AppPockedTrainerApp.swift */,
-				FAE1C5592CA559CD00AB13C3 /* ContentView.swift */,
+				FA02E6702CBD337E0090D4C2 /* ContentView.swift */,
 				FAE1C5652CA55A5000AB13C3 /* Muscules.swift */,
-				FAE1C5672CA55A6500AB13C3 /* MyData.swift */,
-				FAE1C5A62CA9921200AB13C3 /* BoockTraining.swift */,
+				FAF1E1522CC68F6C004F0737 /* MyData 2.swift */,
+				FA2DE0042CC91DD800824600 /* NewTrainingWindow.swift */,
+				FAE1C5A82CA9D5A100AB13C3 /* DDetailView.swift */,
 				FAE1C56B2CA55AD800AB13C3 /* NextView.swift */,
 				FAE1C5792CA5605B00AB13C3 /* WebView.swift */,
 				FAE1C56F2CA55E8600AB13C3 /* Chest.swift */,
@@ -93,10 +106,15 @@
 				FAE1C5772CA55EE300AB13C3 /* Triceps.swift */,
 				FAE1C56D2CA55D1900AB13C3 /* Sholder.swift */,
 				FAE1C57B2CA560BD00AB13C3 /* Forearm.swift */,
+				EFC5588F2CB508D700E952B7 /* Core.swift */,
+				EF51DE502CB810F700B6E821 /* Quadro.swift */,
+				EF51DE522CB812B900B6E821 /* ThingBiceps.swift */,
+				EF51DE542CB813D600B6E821 /* Glunus.swift */,
+				EF51DEA62CB9B9A000B6E821 /* CalfMuscules.swift */,
+				FABBF3C82CCE7A7A00B54091 /* InterfaceForExersize.swift */,
+				FAE1C5862CA695CE00AB13C3 /* ByContactTrainer.swift */,
 				FAE1C55B2CA559CE00AB13C3 /* Assets.xcassets */,
 				FAE1C55D2CA559CE00AB13C3 /* Preview Content */,
-				FAE1C5862CA695CE00AB13C3 /* ByContactTrainer.swift */,
-				FAE1C5A82CA9D5A100AB13C3 /* DDetailView.swift */,
 			);
 			path = AppPockedTrainer;
 			sourceTree = "<group>";
@@ -179,20 +197,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAE1C55A2CA559CD00AB13C3 /* ContentView.swift in Sources */,
 				FAE1C5872CA695CE00AB13C3 /* ByContactTrainer.swift in Sources */,
-				FAE1C5A72CA9921200AB13C3 /* BoockTraining.swift in Sources */,
+				FAF1E1532CC68F6C004F0737 /* MyData 2.swift in Sources */,
+				EF51DE552CB813D800B6E821 /* Glunus.swift in Sources */,
 				FAE1C57C2CA560BD00AB13C3 /* Forearm.swift in Sources */,
 				FAE1C57A2CA5605B00AB13C3 /* WebView.swift in Sources */,
 				FAE1C56E2CA55D1900AB13C3 /* Sholder.swift in Sources */,
+				EF51DE532CB812CF00B6E821 /* ThingBiceps.swift in Sources */,
 				FAE1C5742CA55EB100AB13C3 /* Trapezia.swift in Sources */,
 				FAE1C5662CA55A5000AB13C3 /* Muscules.swift in Sources */,
 				FAE1C5722CA55E9A00AB13C3 /* Back.swift in Sources */,
+				FA2DE0052CC91DEB00824600 /* NewTrainingWindow.swift in Sources */,
 				FAE1C5782CA55EE300AB13C3 /* Triceps.swift in Sources */,
+				EF51DEA72CB9B9B500B6E821 /* CalfMuscules.swift in Sources */,
 				FAE1C5582CA559CD00AB13C3 /* AppPockedTrainerApp.swift in Sources */,
 				FAE1C5762CA55EC600AB13C3 /* Biceps.swift in Sources */,
+				FA02E6712CBD33980090D4C2 /* ContentView.swift in Sources */,
 				FAE1C5702CA55E8600AB13C3 /* Chest.swift in Sources */,
-				FAE1C5682CA55A6500AB13C3 /* MyData.swift in Sources */,
+				EFC558902CB508E600E952B7 /* Core.swift in Sources */,
+				FABBF3C92CCE7A9900B54091 /* InterfaceForExersize.swift in Sources */,
+				EF51DE512CB8111200B6E821 /* Quadro.swift in Sources */,
 				FAE1C5A92CA9D5A100AB13C3 /* DDetailView.swift in Sources */,
 				FAE1C56C2CA55AD800AB13C3 /* NextView.swift in Sources */,
 			);
